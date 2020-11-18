@@ -49,7 +49,7 @@ def acquire_codeup_blogs(urls, cached=False):
             soup = make_soup(url)
             title = soup.find('h1', class_='jupiterx-post-title')
             content = soup.find('div', class_='jupiterx-post-content')
-            d = {'title': title.text, 'content': content.text}
+            d = {'title': title.text, 'original': content.text}
             blog_articles.append(d)
         
         df = pd.DataFrame(blog_articles)
@@ -80,7 +80,7 @@ def get_news_articles(cached=False):
                 article = ({'topic': topic, 
                             'title': title, 
                             'author': author, 
-                            'content': content})
+                            'original': content})
                 articles.append(article)
         df = pd.DataFrame(articles)
         df.to_json('inhorts_articles.json')
